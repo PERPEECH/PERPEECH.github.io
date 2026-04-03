@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OVER THE SUN • LANDOKMAI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* --- รีเซ็ตสไตล์พื้นฐาน --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f7f7; /* พื้นหลังสีเทาอ่อนแบบในรูป */
+    color: #333;
+    padding: 40px;
+}
+
+/* --- ส่วนหัวอัลบั้ม (Header) --- */
+.album-header {
+    display: flex;
+    align-items: start;
+    margin-bottom: 30px;
+}
+
+/* หน้าปกอัลบั้ม */
+#albumCover {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 30px;
+}
+
+/* รายละเอียดข้อความ */
+.album-details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ชื่ออัลบั้ม */
+#albumTitle {
+    font-size: 3.5rem; /* ขนาดใหญ่และหนาแบบในรูป */
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+    margin-top: -10px; /* ขยับขึ้นเล็กน้อยให้ดูพอดี */
+}
+
+/* ข้อมูลศิลปิน (รูปวงกลม + ชื่อ) */
+.artist-info {
+    display: flex;
+    align-items: center;
+}
+
+.artist-avatar {
+    width: 24px;
+    height: 24px;
+    background-color: #ccc; /* ใช้สีเทาแทนรูปภาพจริง */
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.artist-name {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* ข้อมูลเพิ่มเติม (จำนวนเพลง, เวลา, วันที่) */
+#albumMeta {
+    font-size: 1rem;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* --- ส่วนปุ่มควบคุม (Player Controls) --- */
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.play-button {
+    background-color: #9c27b0; /* สีม่วงแบบในรูป */
+    color: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/* --- ส่วนลิสต์เพลง (Tracklist) --- */
+.tracklist-container {
+    max-width: 1000px;
+    background: white; /* พื้นหลังสีขาวสำหรับลิสต์ */
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* หัวข้อ TRACK */
+.tracklist-header {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    color: #888;
+    padding-bottom: 10px;
+}
+
+.col-track { flex: 1; text-align: left; }
+.col-length { width: 80px; text-align: right; }
+.col-actions { width: 80px; text-align: center; }
+
+#tracklist {
+    list-style: none;
+}
+
+#tracklist li {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#tracklist li:last-child {
+    border-bottom: none;
+}
+
+/* จัดการความกว้างแต่ละคอลัมน์ในเพลง */
+.track-info-col {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.track-number {
+    color: #888;
+    margin-right: 15px;
+}
+
+.track-title {
+    font-weight: 500;
+    color: #333;
+}
+
+.length-col {
+    width: 80px;
+    text-align: right;
+    color: #777;
+}
+
+.actions-col {
+    width: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.inline-icon {
+    color: #aaa;
+    margin-left: 10px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+    <div class="album-header">
+    <img id="albumCover" src="" alt="Album Cover">
+    <div class="album-details">
+      <div id="albumTitle"></div>
+      <div class="artist-info">
+        <div class="artist-avatar"></div>         <div class="artist-name">LANDOKMAI</div>
+      </div>
+      <div id="albumMeta"></div>
+    </div>
+  </div>
+
+    <div class="controls">
+    <button class="play-button">▶️</button>
+    <button class="icon-button">❤️</button>
+    <button class="icon-button">📤</button>
+    <button class="icon-button">...</button>
+  </div>
+
+    <div class="tracklist-container">
+    <div class="tracklist-header">
+      <div class="col-track">TRACK</div>
+      <div class="col-length">DURATION</div>
+      <div class="col-actions"></div>
+    </div>
+    <ul id="tracklist"></ul>
+  </div>
+
+  <script>
+    // ข้อมูลจริงจากรูปภาพที่ส่งมา
+    const albumData = {
+        name: "Over The Sun",
+        cover: "ab3.png", // ตรวจสอบว่ามีไฟล์ ab3.png อยู่จริง
+        meta: "4 tracks | 18 minutes | 19/11/2020",
+        tracks: [
+            { title: "Please be true", length: "05:13" },
+            { title: "เพลงที่ 2 (ตัวอย่าง)", length: "04:30" },
+            { title: "เพลงที่ 3 (ตัวอย่าง)", length: "03:50" },
+            { title: "เพลงที่ 4 (ตัวอย่าง)", length: "04:37" }
+        ]
+    };
+
+    // แสดงข้อมูลอัลบั้ม
+    document.getElementById("albumTitle").textContent = albumData.name;
+    document.getElementById("albumCover").src = albumData.cover;
+    document.getElementById("albumMeta").textContent = albumData.meta;
+
+    // แสดงลิสต์เพลง
+    const tracklist = document.getElementById("tracklist");
+    albumData.tracks.forEach((track, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <div class="track-info-col">
+                <span class="track-number">${index + 1}.</span>
+                <span class="track-title">${track.title}</span>
+            </div>
+            <div class="actions-col">
+                <span class="inline-icon">❤️</span>
+                <span class="inline-icon">...</span>
+            </div>
+            <div class="length-col">${track.length}</div>
+        `;
+        tracklist.appendChild(li);
+    });
+  </script>
+
+</body>
+</html>
