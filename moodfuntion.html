@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LANDOKMAI FAN • Mood Picker</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -22,7 +21,7 @@
       min-height: 100vh;
     }
 
-    /* Overlay gradient */
+
     body::before {
       content: "";
       position: fixed;
@@ -94,6 +93,7 @@
       margin-top: 30px;
       font-size: 1.2rem;
       animation: fadeIn 0.4s ease;
+      text-align: left;
     }
 
     @keyframes fadeIn {
@@ -102,20 +102,30 @@
     }
 
     .result button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border-radius: 15px;
+      margin-top: 5px;
+      padding: 6px 12px;
+      border-radius: 12px;
       border: none;
       background: #c084fc;
       color: white;
       cursor: pointer;
       font-family: 'Bungee', sans-serif;
       transition: 0.3s;
+      font-size: 0.9rem;
     }
 
     .result button:hover {
       background: #8b6294;
-      transform: scale(1.1);
+      transform: scale(1.05);
+    }
+
+    .result ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .result li {
+      margin-bottom: 8px;
     }
   </style>
 </head>
@@ -135,40 +145,62 @@
 
     <div class="moods">
       <button onclick="getMood('sad')">SAD</button>
-      <button onclick="getMood('lonely')"> lonely</button>
-      <button onclick="getMood('happy')">happy </button>
+      <button onclick="getMood('lonely')">LONELY</button>
+      <button onclick="getMood('happy')">HAPPY</button>
     </div>
 
     <div id="result" class="result"></div>
   </div>
 
   <script>
-    
     const moodData = {
       sad: {
-        song: "Over the Sun",
-        desc: "เพลงเศร้าหลังฝน",
-        link: "sun.html"
+        songs: [
+          {name: "เพลงรักเพลงแรก (Blooming)", link: "blooming.html"},
+          {name: "ยอม (White Flag)", link: "whiteflag.html"},
+          {name: "Blooming (เพลงรักเพลงแรก) (Live Session)", link: "blooming-live.html"},
+          {name: "I miss you when I’m drunk", link: "imissyou.html"},
+          {name: "I’m saying goodbye", link: "goodbye.html"},
+          {name: "Hearsay", link: "hearsay.html"},
+          {name: "Fall in love too easily", link: "fallinlove.html"},
+          {name: "Love me still", link: "lovemestill.html"},
+          {name: "Bye Bye Neverland", link: "byebye.html"}
+        ],
+        desc: "เพลงเศร้าหรือความรักเจ็บปวด"
       },
       lonely: {
-        song: "All My Purple Feeling",
-        desc: "ความเหงาที่สวยงาม",
-        link: "purple.html"
+        songs: [
+          {name: "ฤดูฝัน (Drizzle)", link: "drizzle.html"},
+          {name: "ทำนองแห่งท้องทะเล (Lullaby of the Sea)", link: "lullaby-sea.html"},
+          {name: "เมื่อไหร่ที่คิดถึงเธอ (Echo)", link: "echo.html"},
+          {name: "ในวันพรุ่งนี้ขอให้เป็นวันที่ดี (Nomad’s Lullaby)", link: "nomads.html"},
+          {name: "Welcome to My Purple Story", link: "purple-story.html"},
+          {name: "ปลายฝนต้นหนาว (Winter Breeze)", link: "winter-breeze.html"},
+          {name: "เกาะลอยฟ้า (still)", link: "still.html"}
+        ],
+        desc: "เพลงเหงา สงบ หรือคิดถึง"
       },
       happy: {
-        song: "WHAT EVE",
-        desc: "เพลงฟีลดีสดใส",
-        link: "what.html"
+        songs: [
+          {name: "B-D-BUB-BA", link: "bdbubba.html"},
+          {name: "TAXI", link: "taxi.html"},
+          {name: "Mr.Masterpiece", link: "masterpiece.html"},
+          {name: "Finger paint", link: "fingerpaint.html"}
+        ],
+        desc: "เพลงสดใส สนุก อบอุ่น"
       }
     };
 
     function getMood(mood) {
       const data = moodData[mood];
+      const songList = data.songs.map(song => 
+        `<li>${song.name} <button onclick="goPage('${song.link}')">ฟัง 🎧</button></li>`
+      ).join("");
 
       document.getElementById("result").innerHTML = `
-        <h3>${data.song}</h3>
+        <h3>เพลงสำหรับ Mood: ${mood.toUpperCase()}</h3>
         <p>${data.desc}</p>
-        <button onclick="goPage('${data.link}')">ไปฟังเพลง 🎧</button>
+        <ul>${songList}</ul>
       `;
     }
 
