@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+<style>
+    
+@keyframes scale-up-center {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url("bg2.png");
+    background-size: cover;
+    background-position: center;
+
+    opacity: 0.5;
+    z-index: -1;
+}
+
+header {
+    background-color: #ad7edd;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 200%;
+    font-family: 'Bungee', sans-serif;
+}
+
+nav {
+    background-color: #8b6294;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Bungee', sans-serif;
+}
+
+nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+}
+
+/* === NEW ALBUM SECTION === */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-top: 80px;
+    flex-wrap: wrap;
+}
+
+.card {
+    text-align: center;
+}
+
+.card img {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 20px;
+
+    transform: scale(0.5);
+    opacity: 0;
+    animation: scale-up-center 0.6s ease forwards;
+    transition: 0.3s;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.card img:hover {
+    transform: scale(1.15);
+}
+
+.card p {
+    margin-top: 15px;
+    color: white;
+}
+
+</style>
+
+<title>LANDOKMAI FAN</title>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<header><strong>LANDOKMAI</strong></header>
+
+<nav>
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="#">LANDOKMAI</a>
+</nav>
+
+<!-- ✅ ALBUMS -->
+<div class="container">
+
+    <a href="what.html" class="card">
+        <img src="">
+        <p>what eve</p>
+    </a>
+
+    <a href="sun.html" class="card">
+        <img src="">
+        <p>Over the sun</p>
+    </a>
+
+    <a href="purple.html" class="card">
+        <img src="ab2.png">
+        <p>All my purple feeling</p>
+    </a>
+
+</div>
+
+</body>
+</html>
